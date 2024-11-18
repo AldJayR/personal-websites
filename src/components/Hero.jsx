@@ -25,7 +25,7 @@ const Hero = () => {
                 <span className="text-2xl md:text-4xl mt-8 block">
                     I&apos;m Aldwin
                 </span>
-                <span className="text-xl mt-4 block">
+                <span className="text-xl md:text-2xl mt-4 block">
                     A
                     <span className="text-[#37CAEC]"> {text}</span>
                     <Cursor />
