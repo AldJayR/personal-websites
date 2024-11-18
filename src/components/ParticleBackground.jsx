@@ -7,13 +7,13 @@ const ParticleBackground = () => {
   const hasInitialized = useRef(false); 
 
   useEffect(() => {
-    if (hasInitialized.current) return; // Prevent re-initialization if already initialized
+    if (hasInitialized.current) return; 
 
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     }).then(() => {
       setInit(true);
-      hasInitialized.current = true; 
+      hasInitialized.current = true;
     });
   }, []);
 
