@@ -1,13 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from "react-router-dom"
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     const toggleMenu = () => setIsMenuOpen(prev => !prev);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [])
+
     return (
-        <header className="font-tilt-warp">
+        <header className={`font-tilt-warp fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+            isScrolled || isMenuOpen
+                ? 'bg-white/30 backdrop-blur-md shadow-md'
+                : 'bg-transparent'
+        }`}>
             <nav className="md:flex md:justify-center items-center w-[92%] mx-auto ">
 
                 {/* Mobile */}
@@ -30,7 +49,7 @@ const Header = () => {
 
                 
 
-                <ul className="hidden md:flex items-center gap-[7vw] pt-5 text-2xl">
+                <ul className="hidden md:flex items-center gap-[7vw] p-5 text-2xl">
                     <li>
                         <NavLink to="#hero" className="hover:text-cyan-400">Home</NavLink>
                     </li>
@@ -53,7 +72,7 @@ const Header = () => {
 
                 {/* Mobile Menu */}
 
-                {isMenuOpen && <ul className="flex-col md:hidden text-xl">
+                {isMenuOpen && <ul className="flex-col md:hidden text-lg">
                     <li className="py-2">
                         <NavLink to="#hero" className="hover:text-cyan-400">Home</NavLink>
                     </li>
