@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         'tilt-warp': ['"Tilt Warp"'],
+        roboto: ['Roboto', 'sans-serif'],
       },
     },
   },
