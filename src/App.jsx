@@ -5,14 +5,15 @@ import {
   RouterProvider,
   Route,
 } from 'react-router-dom';
+import Selection from './pages/Selection';
 import Home from './pages/Home'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/"></Route>
-      <Route path="/aldwin" element={<Home />}></Route>
-      <Route path="/projects/:slug"></Route>
+      <Route path="/" element={<Selection />} />
+      <Route path="/aldwin" element={<Home />} />
+      <Route path="/aldwin/projects/:slug" />
     </>
   )
 )
