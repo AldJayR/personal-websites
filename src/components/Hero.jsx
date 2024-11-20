@@ -18,7 +18,7 @@ const Hero = () => {
         <>
             <Header />
             <MemoizedParticleBackground />
-            <div className="text-center font-tilt-warp pt-20 md:pt-44" id="hero">
+            <div className="text-center font-tilt-warp pt-20 md:pt-44 select-none" id="hero">
                 <h1 className="text-6xl md:text-9xl">
                     <span className="text-[#37CAEC]">H</span>
                     ey
