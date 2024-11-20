@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import Avatar from '../components/Avatar';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const AvatarGrid = ({ avatars, chooseAvatar }) => (
     <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
