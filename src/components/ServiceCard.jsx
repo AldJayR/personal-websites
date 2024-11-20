@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faReact } from '@fortawesome/free-brands-svg-icons';
 
 const getIconColor = (icon) => {
     const iconColors = {
@@ -89,18 +90,16 @@ export const ServiceCard = ({ service, description, icon, icons }) => {
                 {service}
             </h3>
 
-            {/* Icons */}
             <div className="flex justify-center gap-4 mb-4">
                 {(icons || [icon]).map((icn, idx) => (
                     <FontAwesomeIcon
                         key={idx}
                         icon={icn}
-                        className={`text-3xl ${getIconColor(icn)}`}
+                        className={`text-3xl ${icn === faReact ? "animate-spin" : ""} ${getIconColor(icn)}`}
                     />
                 ))}
             </div>
 
-            {/* Description */}
             <p className="text-gray-600 text-base font-poppins">{description}</p>
         </div>
     );
