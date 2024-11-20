@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         'tilt-warp': ['"Tilt Warp"'],
         roboto: ['Roboto', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif']
       },
     },
   },
