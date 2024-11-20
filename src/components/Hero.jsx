@@ -14,6 +14,14 @@ const Hero = () => {
         deleteSpeed: 120,
     });
 
+    const handleNavLinkClick = (e, targetId) => {
+        e.preventDefault();
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <>
             <Header />
@@ -31,7 +39,7 @@ const Hero = () => {
                     <span className="text-[#37CAEC]"> {text}</span>
                     <Cursor />
                 </span>
-                <Link to="#projects">
+                <Link to="#projects" onClick={(e) => handleNavLinkClick(e, '#hero')}>
                     <button className="font-roboto font-semibold mt-6 text-base md:text-lg text-white py-3 px-8 rounded-3xl bg-cyan-400 hover:bg-cyan-600">Get Started</button>
                 </Link>
                 

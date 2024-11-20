@@ -27,7 +27,8 @@ const Header = () => {
         if (targetElement) {
             targetElement.scrollIntoView({ behavior: 'smooth' });
         }
-        setIsMenuOpen(false);
+        if (isMenuOpen)
+            setIsMenuOpen(false);
     };
 
     return (
