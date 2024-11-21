@@ -1,99 +1,64 @@
-import { useState, useEffect } from 'react';
-import { NavLink } from "react-router-dom";
+import { useState, useRef } from 'react';
+import { MenuButton } from './MenuButton';
+import { NavItems } from './NavItems';
+import { useScroll } from './hooks/useScroll';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('hero');
+    const isScrollingTo = useRef(false);
+
+    useScroll(setIsScrolled, setActiveSection, isScrollingTo);
 
     const toggleMenu = () => setIsMenuOpen(prev => !prev);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
 
     const handleNavLinkClick = (e, targetId) => {
         e.preventDefault();
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
+            const section = targetId.replace('#', '');
+            isScrollingTo.current = true;
+            setActiveSection(section);
+            
             targetElement.scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                isScrollingTo.current = false;
+            }, 1000); 
         }
-        if (isMenuOpen)
-            setIsMenuOpen(false);
+        if (isMenuOpen) setIsMenuOpen(false);
     };
 
+    const getLinkClass = (section) => {
+        return `hover:text-cyan-400 ${activeSection === section ? 'text-cyan-600' : ''}`;
+    };
+    
     return (
         <header className={`font-tilt-warp fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-            isScrolled || isMenuOpen
-                ? 'bg-white/30 backdrop-blur-md shadow-md'
-                : 'bg-transparent'
+            isScrolled || isMenuOpen ? 'bg-white/30 backdrop-blur-md shadow-md' : 'bg-transparent'
         }`}>
-            <nav className="md:flex md:justify-center items-center w-[92%] mx-auto ">
-            <div className="md:hidden self-start pt-3 w-full">
-                <button className="text-black" onClick={toggleMenu}>
-                    <svg
-                        fill='none'
-                        stroke='currentColor'
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth={2}
-                        viewBox='0 0 24 24'
-                        className='w-6 h-6'
-                    >
-                        <path d='M4 6h16M4 12h16M4 18h16'></path>
-                    </svg>
-                </button>
-            </div>
+            <nav className="md:flex md:justify-center items-center w-[92%] mx-auto">
+                <div className="md:hidden self-start pt-3 w-full">
+                    <MenuButton onClick={toggleMenu} />
+                </div>
 
-                <ul className="hidden md:flex items-center gap-[7vw] p-5 text-2xl">
-                    <li>
-                        <NavLink to="#hero" onClick={(e) => handleNavLinkClick(e, '#hero')} className="hover:text-cyan-400">Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="#about" onClick={(e) => handleNavLinkClick(e, '#about')} className="hover:text-cyan-400">About</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="#services" onClick={(e) => handleNavLinkClick(e, '#services')} className="hover:text-cyan-400">Services</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="#projects" onClick={(e) => handleNavLinkClick(e, '#projects')} className="hover:text-cyan-400">Projects</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="#contact" onClick={(e) => handleNavLinkClick(e, '#contact')} className="hover:text-cyan-400">Contact</NavLink>
-                    </li>
-                </ul>
+                <NavItems 
+                    isMobile={false} 
+                    getLinkClass={getLinkClass} 
+                    handleNavLinkClick={handleNavLinkClick} 
+                />
 
-                {/* Mobile Menu */}
-                {isMenuOpen && <ul className="flex-col md:hidden text-lg">
-                    <li className="py-2">
-                        <NavLink to="#hero" onClick={(e) => handleNavLinkClick(e, '#hero')} className="hover:text-cyan-400">Home</NavLink>
-                    </li>
-                    <li className="py-2">
-                        <NavLink to="#about" onClick={(e) => handleNavLinkClick(e, '#about')} className="hover:text-cyan-400">About</NavLink>
-                    </li>
-                    <li className="py-2">
-                        <NavLink to="#services" onClick={(e) => handleNavLinkClick(e, '#services')} className="hover:text-cyan-400">Services</NavLink>
-                    </li>
-                    <li className="py-2">
-                        <NavLink to="#projects" onClick={(e) => handleNavLinkClick(e, '#projects')} className="hover:text-cyan-400">Projects</NavLink>
-                    </li>
-                
-                    <li className="py-2">
-                        <NavLink to="#contact" onClick={(e) => handleNavLinkClick(e, '#contact')} className="hover:text-cyan-400">Contact</NavLink>
-                    </li>
-                </ul>}
+                {isMenuOpen && (
+                    <NavItems 
+                        isMobile={true} 
+                        getLinkClass={getLinkClass} 
+                        handleNavLinkClick={handleNavLinkClick} 
+                    />
+                )}
             </nav>
         </header>
-    )
-}
+    );
+};
 
 export default Header;

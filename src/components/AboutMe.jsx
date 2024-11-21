@@ -16,11 +16,11 @@ export const AboutMe = () => {
                             Aldwin Jairo Sarte
                         </h2>
                         <p className="font-inter font-semibold text-base leading-[30px] md:text-[20px] md:leading-[36px] tracking-[0.01em]">
-                            I am a 2nd year BSIT student from{' '}
+                            I am a 20-year-old second-year BSIT student at{' '}
                             <span className="text-[#FF9D00]">
                                 Nueva Ecija University of Science and Technology.
                             </span>{' '}
-                            I&apos;m currently focusing on Web Development and Software Development, with my end goal in Cybersecurity.
+                            My current focus is on Web Development and Software Development, with a long-term goal of building a career in Cybersecurity.
                         </p>
                         {/* Social Icons for larger screens */}
                         <div className="hidden md:flex gap-6 mt-12">

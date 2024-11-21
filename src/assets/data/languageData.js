@@ -4,13 +4,13 @@ import { faCode } from '@fortawesome/free-solid-svg-icons';
 export const languageData = {
     HTML: {
         icon: faHtml5,
-        color: '#E34F26',
+        color: '#C5431F ',
         bgColor: '#F06529'
     },
     CSS: {
         icon: faCss3Alt,
-        color: '#1572B6',
-        bgColor: '#2965F1'
+        color: '#0D4C8F',
+        bgColor: '#4A84F7'
     },
     JavaScript: {
         icon: faJs,
