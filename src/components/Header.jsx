@@ -68,9 +68,6 @@ const Header = () => {
                         <NavLink to="#projects" onClick={(e) => handleNavLinkClick(e, '#projects')} className="hover:text-cyan-400">Projects</NavLink>
                     </li>
                     <li>
-                        <NavLink to="#certificates" onClick={(e) => handleNavLinkClick(e, '#certificates')} className="hover:text-cyan-400">Certificates</NavLink>
-                    </li>
-                    <li>
                         <NavLink to="#contact" onClick={(e) => handleNavLinkClick(e, '#contact')} className="hover:text-cyan-400">Contact</NavLink>
                     </li>
                 </ul>
@@ -89,9 +86,7 @@ const Header = () => {
                     <li className="py-2">
                         <NavLink to="#projects" onClick={(e) => handleNavLinkClick(e, '#projects')} className="hover:text-cyan-400">Projects</NavLink>
                     </li>
-                    <li className="py-2">
-                        <NavLink to="#certificates" onClick={(e) => handleNavLinkClick(e, '#certificates')} className="hover:text-cyan-400">Certificates</NavLink>
-                    </li>
+                
                     <li className="py-2">
                         <NavLink to="#contact" onClick={(e) => handleNavLinkClick(e, '#contact')} className="hover:text-cyan-400">Contact</NavLink>
                     </li>
