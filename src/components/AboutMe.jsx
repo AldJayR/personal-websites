@@ -1,4 +1,4 @@
-import myImage from '../assets/images/IMG_0684.jpg';
+import myImage from '/assets/images/IMG_0684.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
