@@ -7,7 +7,7 @@ export const AboutMe = () => {
     return (
         <section className="lg:p-36 md:p-24 pt-32 pb-16 px-6" id="about">
             <div className="bg-neutral-100 lg:px-12 md:px-8 px-12 py-8 rounded-[45px] shadow-lg">
-                <h1 className="font-tilt-warp text-2xl md:text-4xl leading-[45px] text-center tracking-[0.22em] text-[#262222] mb-4 md:mb-9">
+                <h1 className="heading-style">
                     ABOUT ME
                 </h1>
                 <div className="flex flex-col-reverse md:flex-row items-center gap-8">
