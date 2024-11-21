@@ -5,7 +5,7 @@ import LanguageBadge from './LanguageBadge';
 
 const ProjectCard = ({ project }) => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 mx-auto mb-16 max-w-4xl shadow-lg rounded-lg overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-100 transition-transform transform hover:scale-105 hover:shadow-2xl">
+        <div className="project-card">
             {/* Image Section */}
             <div className="w-full h-72">
                 <img 
@@ -38,6 +38,7 @@ const ProjectCard = ({ project }) => {
                         )}
                 </div>
 
+                {/* GitHub Link */}
                 {project.github_url && (
                     <a 
                         href={project.github_url} 
