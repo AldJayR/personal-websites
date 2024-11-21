@@ -38,7 +38,7 @@ const ContactForm = ({ serviceId, templateId }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md" id="contact">
       <h2 className="text-2xl font-bold mb-6 text-center">Contact Me</h2>
 
       {submitStatus === 'success' && (
