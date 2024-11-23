@@ -3,56 +3,9 @@ import myImage from '/assets/images/IMG_0684.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { containerVariants, itemVariants, imageVariants, socialIconVariants } from './animation-variants/about-me-variants';
 
 const AboutMe = () => {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { y: 50, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 12
-            }
-        }
-    };
-
-    const imageVariants = {
-        hidden: { scale: 0.8, opacity: 0 },
-        visible: {
-            scale: 1,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 15,
-                duration: 0.6
-            }
-        }
-    };
-
-    const socialIconVariants = {
-        hover: {
-            scale: 1.2,
-            rotate: [0, -10, 10, -5, 5, 0],
-            transition: {
-                duration: 0.4
-            }
-        },
-        tap: { scale: 0.9 }
-    };
 
     return (
         <section className="lg:p-36 md:p-24 pt-32 pb-16 px-6" id="about">

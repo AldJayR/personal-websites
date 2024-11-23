@@ -4,6 +4,11 @@ import ParticleBackground from './ParticleBackground';
 import Header from './Header';
 import { useTypewriter, Cursor } from 'react-simple-typewriter'
 import { Link } from 'react-router-dom';
+import { containerVariants, 
+        itemVariants,
+        buttonVariants,
+        nameVariants,
+        roleVariants } from './animation-variants/hero-variants';
 
 const MemoizedParticleBackground = memo(ParticleBackground);
 
@@ -23,79 +28,7 @@ const Hero = () => {
         }
     };
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.3,
-                delayChildren: 0.2,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                duration: 0.8,
-                ease: [0.6, -0.05, 0.01, 0.99],
-            },
-        },
-    };
-
-    const buttonVariants = {
-        hidden: { scale: 0, opacity: 0 },
-        visible: {
-            scale: 1,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                stiffness: 260,
-                damping: 20,
-                delay: 1.2,
-            },
-        },
-        hover: {
-            scale: 1.05,
-            transition: {
-                duration: 0.3,
-            },
-        },
-        tap: {
-            scale: 0.95,
-        },
-    };
-
-    const nameVariants = {
-        hidden: { x: -100, opacity: 0 },
-        visible: {
-            x: 0,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                stiffness: 200,
-                damping: 20,
-                delay: 0.6,
-            },
-        },
-    };
-
-    const roleVariants = {
-        hidden: { x: 100, opacity: 0 },
-        visible: {
-            x: 0,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                stiffness: 200,
-                damping: 20,
-                delay: 0.8,
-            },
-        },
-    };
+    
 
     return (
         <>

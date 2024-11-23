@@ -2,6 +2,8 @@
 import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReact } from '@fortawesome/free-brands-svg-icons';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 const getIconColor = (icon) => {
     const iconColors = {
@@ -29,8 +31,9 @@ const getServiceColor = (service) => {
     return serviceColors[service] || 'text-gray-700';
 };
 
-export const ServiceCard = ({ service, description, icon, icons }) => {
+export const ServiceCard = ({ service, description, icon, icons, index }) => {
     const cardRef = useRef(null);
+    const isInView = useInView(cardRef, { once: true, margin: "-100px" });
 
     useEffect(() => {
         const card = cardRef.current;
@@ -48,9 +51,30 @@ export const ServiceCard = ({ service, description, icon, icons }) => {
         return () => card.removeEventListener('mousemove', updateMousePosition);
     }, []);
 
+    const cardVariants = {
+        hidden: { 
+            opacity: 0,
+            y: 50,
+            scale: 0.9
+        },
+        visible: { 
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: { 
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut"
+            }
+        }
+    };
+
     return (
-        <div
+        <motion.div
             ref={cardRef}
+            variants={cardVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
             className="group p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 text-center bg-white/30 backdrop-blur-md w-[250px] max-w-[350px] mx-auto h-56 md:h-auto overflow-hidden relative"
         >
             {/* Radial Hover Effect */}
@@ -81,16 +105,23 @@ export const ServiceCard = ({ service, description, icon, icons }) => {
                 }}
             />
 
-            {/* Service Title */}
-            <h3
+            <motion.h3
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ delay: index * 0.1 + 0.2 }}
                 className={`relative z-10 text-xl font-poppins font-bold mb-4 ${getServiceColor(
                     typeof service === 'string' ? service : 'default'
                 )}`}
             >
                 {service}
-            </h3>
+            </motion.h3>
 
-            <div className="flex justify-center gap-4 mb-4">
+            <motion.div 
+                className="flex justify-center gap-4 mb-4"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ delay: index * 0.1 + 0.3 }}
+            >
                 {(icons || [icon]).map((icn, idx) => (
                     <FontAwesomeIcon
                         key={idx}
@@ -98,9 +129,16 @@ export const ServiceCard = ({ service, description, icon, icons }) => {
                         className={`text-3xl ${icn === faReact ? "animate-spin" : ""} ${getIconColor(icn)}`}
                     />
                 ))}
-            </div>
+            </motion.div>
 
-            <p className="text-gray-600 text-base font-poppins">{description}</p>
-        </div>
+            <motion.p 
+                className="text-gray-600 text-base font-poppins"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ delay: index * 0.1 + 0.4 }}
+            >
+                {description}
+            </motion.p>
+        </motion.div>
     );
 };
