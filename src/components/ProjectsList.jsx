@@ -3,17 +3,6 @@ import { projects } from "../assets/data/projects";
 import { motion } from 'framer-motion';
 
 const ProjectsList = () => {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.3,
-                delayChildren: 0.2
-            }
-        }
-    };
-
     const titleVariants = {
         hidden: { 
             opacity: 0,
@@ -32,7 +21,7 @@ const ProjectsList = () => {
     const getItemVariants = (index) => ({
         hidden: { 
             opacity: 0,
-            x: index % 2 === 0 ? 200 : -200
+            x: index % 2 === 0 ? 75 : -75
         },
         visible: { 
             opacity: 1,
@@ -45,16 +34,15 @@ const ProjectsList = () => {
     });
 
     return (
-        <motion.div 
+        <div 
             className="max-w-7xl mx-auto pt-12 md:pt-32 px-12 md:px-32"
             id="projects"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
         >
             <motion.h1 
                 className="heading-style text-4xl mb-16"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
                 variants={titleVariants}
             >
                 PROJECTS
@@ -63,6 +51,9 @@ const ProjectsList = () => {
                 {projects.map((project, index) => (
                     <motion.div
                         key={project.id}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-50px" }} // Adjust the margin as needed
                         variants={getItemVariants(index)}
                     >
                         <ProjectCard 
@@ -72,7 +63,7 @@ const ProjectsList = () => {
                     </motion.div>
                 ))}
             </div>
-        </motion.div>
+        </div>
     );
 };
 

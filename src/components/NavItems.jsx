@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { CustomNavLink } from './CustomNavLink';
-import { motion } from "motion/react"
 
 export const NavItems = ({ isMobile, getLinkClass, handleNavLinkClick }) => {
     const navItems = [
@@ -14,13 +13,7 @@ export const NavItems = ({ isMobile, getLinkClass, handleNavLinkClick }) => {
     return (
         <ul className={isMobile ? "flex-col md:hidden text-lg" : "hidden md:flex items-center gap-[7vw] p-5 text-2xl"}>
             {navItems.map(({ to, text, section }) => (
-                <motion.li
-                    key={section}
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    className={isMobile ? "py-2" : ""}
-                >
+                <li key={section} className={isMobile ? "py-2" : ""}>
                     <CustomNavLink
                         to={to}
                         onClick={(e) => handleNavLinkClick(e, to)}
@@ -28,7 +21,7 @@ export const NavItems = ({ isMobile, getLinkClass, handleNavLinkClick }) => {
                     >
                         {text}
                     </CustomNavLink>
-                </motion.li>
+                </li>
             ))}
         </ul>
     );
