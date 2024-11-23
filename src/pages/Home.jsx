@@ -2,7 +2,7 @@ import emailjs from '@emailjs/browser';
 import { useEffect } from 'react';
 import Hero from "../components/Hero";
 import ServicesSection from "../components/ServiceSection";
-import { AboutMe } from "../components/AboutMe";
+import AboutMe from "../components/AboutMe";
 import ProjectsList from "../components/ProjectsList";
 import ContactForm from "../components/ContactForm";
 
