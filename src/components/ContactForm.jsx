@@ -38,7 +38,7 @@ const ContactForm = ({ serviceId, templateId }) => {
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto" id="contact">
+    <div className="relative w-full max-w-md mx-auto pb-12" id="contact">
       <div className="absolute -top-10 -left-10 w-20 h-20 bg-purple-400 rounded-full blur-xl opacity-60 animate-pulse" />
       <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-pink-400 rounded-full blur-xl opacity-60 animate-pulse" />
       

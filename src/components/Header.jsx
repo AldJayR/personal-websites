@@ -14,65 +14,77 @@ const Header = () => {
 
     const toggleMenu = () => setIsMenuOpen(prev => !prev);
 
+    // Extracted scroll animation function
+    const scrollToPosition = (targetPosition) => {
+        const startPosition = window.scrollY;
+        const distance = targetPosition - startPosition;
+        const duration = 0; // ms
+        let start = null;
+
+        const animation = (currentTime) => {
+            if (start === null) start = currentTime;
+            const timeElapsed = currentTime - start;
+            const progress = Math.min(timeElapsed / duration, 1);
+
+            // Improved easing function
+            const easeInOutQuad = t => t < 0.5 
+                ? 2 * t * t 
+                : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+            window.scrollTo({
+                top: startPosition + (distance * easeInOutQuad(progress)),
+                behavior: 'auto' // We're handling the smooth scroll manually
+            });
+
+            if (progress < 1) {
+                requestAnimationFrame(animation);
+            } else {
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'auto'
+                });
+                setTimeout(() => {
+                    isScrollingTo.current = false;
+                }, 100);
+            }
+        };
+
+        requestAnimationFrame(animation);
+    };
+
+    const executeScroll = (targetId) => {
+        const targetElement = document.getElementById(targetId.replace('#', ''));
+        if (!targetElement) return;
+
+        isScrollingTo.current = true;
+        
+        // Get the header height and add a small offset
+        const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+        const offset = 16; // Additional offset in pixels
+        
+        // Calculate the target position with offset
+        const targetRect = targetElement.getBoundingClientRect();
+        const targetPosition = window.scrollY + targetRect.top - headerHeight - offset;
+        
+        scrollToPosition(targetPosition);
+    };
+
     const handleNavLinkClick = (e, targetId) => {
         e.preventDefault();
         
-        const targetElement = document.querySelector(targetId);
-        if (!targetElement) return;
-
-        // First close the menu if it's open
         if (isMenuOpen) {
             setIsMenuOpen(false);
-            // Give the menu time to start closing
-            setTimeout(executeScroll, 500)
+            // Wait for menu animation to complete before scrolling
+            setTimeout(() => executeScroll(targetId), 0);
         } else {
-            executeScroll();
-        }
-
-        const executeScroll = () => {
-            const section = targetId.replace('#', '');
-            isScrollingTo.current = true;
-            setActiveSection(section);
-
-            // Get the header height
-            const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-            
-            // Calculate the target position with offset
-            const targetPosition = window.pageYOffset + targetElement.getBoundingClientRect().top - headerHeight;
-
-            // Create smooth scroll animation
-            const startPosition = window.pageYOffset;
-            const distance = targetPosition - startPosition;
-            const duration = 1000; // ms
-            let start = null;
-
-            function animation(currentTime) {
-                if (start === null) start = currentTime;
-                const timeElapsed = currentTime - start;
-                const progress = Math.min(timeElapsed / duration, 1);
-
-                // Easing function
-                const easeInOutQuad = t => t < 0.5 
-                    ? 2 * t * t 
-                    : 1 - Math.pow(-2 * t + 2, 2) / 2;
-
-                window.scrollTo(0, startPosition + (distance * easeInOutQuad(progress)));
-
-                if (progress < 1) {
-                    requestAnimationFrame(animation);
-                } else {
-                    // Ensure we're exactly at the right position
-                    window.scrollTo(0, targetPosition);
-                    isScrollingTo.current = false;
-                }
-            }
-
-            requestAnimationFrame(animation);
+            executeScroll(targetId);
         }
     };
 
     const getLinkClass = (section) => {
-        return `hover:text-cyan-400 ${activeSection === section ? 'text-cyan-600' : ''}`;
+        return `hover:text-cyan-400 transition-colors duration-200 ${
+            activeSection === section ? 'text-cyan-600' : 'text-gray-800'
+        }`;
     };
 
     const headerVariants = {
