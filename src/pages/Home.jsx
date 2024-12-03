@@ -7,15 +7,6 @@ import ProjectsList from "../components/ProjectsList";
 import ContactForm from "../components/ContactForm";
 
 const Home = () => {
-    /*
-    const today = new Date().toISOString().split("T")[0];
-
-    const presentationDate = "2024-12-04";
-
-    if (today !== presentationDate) {
-        return <h1 className="text-center text-4xl font-roboto">It&apos;s not presentation day!</h1>
-    }
-    */
 
     useEffect(() => {
         if (!import.meta.env.VITE_EMAILJS_PUBLIC_KEY) {
@@ -26,6 +17,9 @@ const Home = () => {
         }
     }, []);
     
+    useEffect(() => {
+        document.title = "Aldwin Jairo | Portfolio";
+    }, []);
     
     return (
         <>

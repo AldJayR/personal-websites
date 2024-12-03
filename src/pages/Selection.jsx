@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import BackgroundVideo from '../components/BackgroundVideo';
@@ -12,6 +12,10 @@ const Selection = () => {
     const [fadeOut, setFadeOut] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        document.title = "Welcome! Select your website";
+    }, [])
+
     const avatars = [
         { img: "https://robohash.org/Justine", name: "Justine" },
         { img: "https://robohash.org/Ardee", name: "Ardee" },
@@ -21,14 +25,27 @@ const Selection = () => {
     ];
 
     const handleAvatarClick = (page) => {
-        setFadeOut(true); 
+        setFadeOut(true);
         setSelectedPage(page);
-
+    
         setTimeout(() => {
-            setLoading(true); 
-            setTimeout(() => navigate(`/${page.toLowerCase()}`), 3000); 
-        }, 1000); 
+            setLoading(true);
+            setTimeout(() => {
+                if (page.toLowerCase() === 'aldwin') {
+                    navigate(`/${page.toLowerCase()}`);
+                } else {
+                    const externalLinks = {
+                        justine: 'https://external-site-for-justine.com',
+                        ardee: 'https://aaards.github.io/ardsweb/',
+                        russel: 'https://external-site-for-russel.com',
+                        piolo: 'https://external-site-for-piolo.com',
+                    };
+                    window.location.href = externalLinks[page.toLowerCase()];
+                }
+            }, 3000);
+        }, 1000);
     };
+    
 
     return (
         <div className="relative w-screen h-screen overflow-hidden">
