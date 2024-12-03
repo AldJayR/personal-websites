@@ -35,7 +35,7 @@ const Selection = () => {
                     navigate(`/${page.toLowerCase()}`);
                 } else {
                     const externalLinks = {
-                        justine: 'https://external-site-for-justine.com',
+                        justine: 'https://aldjayr.github.io/justine-portfolio/',
                         ardee: 'https://aaards.github.io/ardsweb/',
                         russel: 'https://external-site-for-russel.com',
                         piolo: 'https://external-site-for-piolo.com',
