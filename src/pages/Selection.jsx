@@ -37,7 +37,7 @@ const Selection = () => {
                     const externalLinks = {
                         justine: 'https://aldjayr.github.io/justine-portfolio/',
                         ardee: 'https://aaards.github.io/ardsweb/',
-                        russel: 'https://external-site-for-russel.com',
+                        russel: 'https://aldjayr.github.io/russel-website/main.html',
                         piolo: 'https://external-site-for-piolo.com',
                     };
                     window.location.href = externalLinks[page.toLowerCase()];
